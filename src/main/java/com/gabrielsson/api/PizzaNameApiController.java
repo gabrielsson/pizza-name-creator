@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Optional;
 
 @Controller
 public class PizzaNameApiController implements PizzaNameApi {
@@ -22,6 +24,6 @@ public class PizzaNameApiController implements PizzaNameApi {
 
     @Override
     public ResponseEntity<String> nameGet(ArrayList<String> ingredients) {
-        return new ResponseEntity<>(pizzaNameService.get(ingredients), HttpStatus.OK);
+        return new ResponseEntity<>(pizzaNameService.get(Optional.ofNullable(ingredients).orElse((new ArrayList<>()))), HttpStatus.OK);
     }
 }
