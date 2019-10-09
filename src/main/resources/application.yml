@@ -1,0 +1,20 @@
+springfox:
+  documentation:
+    swagger.v2.path: /api-docs
+server:
+  port: 8080
+  contextPath: /v1
+spring:
+  application:
+    name: pizza-menu-facade
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging.level.root: INFO
+
+opentracing:
+  jaeger:
+    enabled: true
