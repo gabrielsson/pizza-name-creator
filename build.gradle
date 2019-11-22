@@ -38,7 +38,7 @@ dependencies {
 }
 
 group = 'gabrielsson'
-version = '1.0.0'
+version = '1.1.0'
 description = 'Pizza name creator'
 sourceCompatibility = '11'
 

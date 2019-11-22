@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class PizzaNameApiController implements PizzaNameApi {
@@ -25,5 +27,12 @@ public class PizzaNameApiController implements PizzaNameApi {
     @Override
     public ResponseEntity<String> nameGet(ArrayList<String> ingredients) {
         return new ResponseEntity<>(pizzaNameService.get(Optional.ofNullable(ingredients).orElse((new ArrayList<>()))), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<String>> namesPost(ArrayList<ArrayList<String>> ingredients) {
+        return  new ResponseEntity<>(ingredients.stream()
+                .map(list->pizzaNameService.get(Optional.ofNullable(list).orElse((new ArrayList<>()))))
+                .collect(Collectors.toList()), HttpStatus.OK);
     }
 }

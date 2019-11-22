@@ -8,6 +8,8 @@ package com.gabrielsson.api;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,4 +27,12 @@ public interface PizzaNameApi {
             produces = {"application/text"},
             method = RequestMethod.GET)
     ResponseEntity<String> nameGet(@RequestParam(required = false) ArrayList<String> ingredients);
+
+    @ApiOperation(value = "Get pizza names", httpMethod = "POST", nickname = "namesPost", notes = "Retrieve pizza names for the given ingredients array.", response = List.class, tags = {})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = List.class)})
+    @RequestMapping(value = "/names",
+            produces = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<List<String>> namesPost(@RequestBody ArrayList<ArrayList<String>> ingredients);
 }
