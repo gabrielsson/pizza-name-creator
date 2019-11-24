@@ -11,8 +11,10 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
-
+        include: prometheus, health, info
+      base-path: /
+      path-mapping:
+        prometheus: metrics
 logging.level.root: INFO
 
 opentracing:
