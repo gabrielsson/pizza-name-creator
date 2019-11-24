@@ -26,6 +26,7 @@ apply plugin: 'com.palantir.docker'
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-registry-prometheus:latest.release'
     implementation 'io.springfox:springfox-swagger2:2.9.2'
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
     implementation 'com.github.joschi.jackson:jackson-datatype-threetenbp:2.8.4'
