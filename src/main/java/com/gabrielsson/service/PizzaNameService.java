@@ -27,9 +27,12 @@ public class PizzaNameService {
 
     public String get(List<String> ingredients) {
         String key = createIngredientKey(ingredients);
-
         String name = cache.get(key, this::createPizzaName);
         return name;
+    }
+
+    public long cacheSize() {
+        return cache.estimatedSize();
     }
 
     private String createIngredientKey(List<String> ingredients) {
