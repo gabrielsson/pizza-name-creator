@@ -1,62 +1,33 @@
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-
-
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
-        classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.22.1')
-    }
+plugins {
+    id 'java'
+    id "io.quarkus"
 }
 
 repositories {
-    mavenCentral()
+     mavenLocal()
+     mavenCentral()
 }
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'com.palantir.docker'
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'io.micrometer:micrometer-registry-prometheus:latest.release'
-    implementation 'org.aspectj:aspectjweaver:1.9.5'
-    implementation 'io.springfox:springfox-swagger2:2.9.2'
-    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-    implementation 'com.github.joschi.jackson:jackson-datatype-threetenbp:2.8.4'
-    implementation 'javax.validation:validation-api:2.0.1.Final'
-    implementation 'com.github.dpaukov:combinatoricslib3:3.3.0'
-    implementation 'com.github.ben-manes.caffeine:caffeine:2.8.0'
-    compileOnly("org.projectlombok:lombok:1.18.10")
-    annotationProcessor("org.projectlombok:lombok:1.18.10")
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-resteasy'
+    implementation 'io.quarkus:quarkus-resteasy-jackson'
+    implementation 'io.quarkus:quarkus-smallrye-metrics'
+    implementation 'io.quarkus:quarkus-smallrye-opentracing'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.1.8.RELEASE'
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
 }
 
-group = 'gabrielsson'
-version = '1.1.0'
-description = 'Pizza name creator'
-sourceCompatibility = '11'
+group 'com.gabrielsson'
+version '2.0.0-SNAPSHOT'
 
-bootJar {
-    archivesBaseName = 'pizza-name-creator'
+compileJava {
+    options.compilerArgs << '-parameters'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
-task unpack(type: Copy) {
-    dependsOn bootJar
-    from(zipTree(tasks.bootJar.outputs.files.singleFile))
-    into("build/dependency")
-}
-docker {
-    name "${project.group}/${bootJar.baseName}"
-    copySpec.from(tasks.unpack.outputs).into("dependency")
-    buildArgs(['DEPENDENCY': "dependency"])
-}
