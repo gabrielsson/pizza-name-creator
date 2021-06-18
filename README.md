@@ -1,3 +1,9 @@
+# Names source
+The source of the names comes from OpenStreetMap
+
+https://www.openstreetmap.org/copyright
+
+
 # pizza-name-creator project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
