@@ -1,6 +1,7 @@
 # Names source
 The source of the names comes from OpenStreetMap
 
+[© OpenStreetMap contributors](https://www.openstreetmap.org/copyright)
 https://www.openstreetmap.org/copyright
 
 
