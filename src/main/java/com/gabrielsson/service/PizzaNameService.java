@@ -50,7 +50,6 @@ public class PizzaNameService {
         return collect;
     }
 
-
     private String getRandomCity() {
         return cities.stream()
                 .skip((int) (cities.size() * Math.random()))

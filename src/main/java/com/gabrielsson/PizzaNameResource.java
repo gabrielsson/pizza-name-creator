@@ -34,7 +34,7 @@ public class PizzaNameResource {
     @Timed
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> name(ArrayList<ArrayList<String>> ingredients) {
+    public List<String> name(List<List<String>> ingredients) {
         return ingredients.stream()
                 .map(list -> service.get(Optional.ofNullable(list).orElse((new ArrayList<>()))))
                 .collect(Collectors.toList());
