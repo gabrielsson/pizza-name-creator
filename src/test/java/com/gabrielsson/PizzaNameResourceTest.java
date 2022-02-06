@@ -42,6 +42,4 @@ public class PizzaNameResourceTest {
         Assertions.assertEquals(names[0], names[1]);
 
     }
-
-
 }

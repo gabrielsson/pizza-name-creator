@@ -14,7 +14,7 @@
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>2.7.0.Final</quarkus.platform.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-    <scala.version>2.12.8</scala.version>
+    <scala.version>2.13.6</scala.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -64,10 +64,21 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-cache</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
+
   </dependencies>
   <build>
+    <sourceDirectory>src/main/scala</sourceDirectory>
     <plugins>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
