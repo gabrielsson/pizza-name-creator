@@ -15,8 +15,9 @@ public class PizzaNameResourceTest {
 
     @Test
     public void postIngredientsYieldsName() {
+
         given()
-                .body(Arrays.asList(Arrays.asList("a"), Arrays.asList("b")))
+                .body(java.util.Arrays.asList(Arrays.asList("a"), Arrays.asList("b")))
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/name")
@@ -29,7 +30,7 @@ public class PizzaNameResourceTest {
     @Test
     public void postSameIngredientsYieldsSameNames() {
         String[] names = given()
-                .body(Arrays.asList(Arrays.asList("a"), Arrays.asList("a")))
+                .body(Arrays.asList(Arrays.asList("a", "c"), Arrays.asList("a", "c")))
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/name")
@@ -40,6 +41,5 @@ public class PizzaNameResourceTest {
                 .extract().body().as(String[].class);
 
         Assertions.assertEquals(names[0], names[1]);
-
     }
 }

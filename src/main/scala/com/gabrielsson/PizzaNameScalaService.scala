@@ -1,6 +1,6 @@
 package com.gabrielsson
 
-import io.quarkus.cache.{Cache, CacheResult}
+import io.quarkus.cache.Cache
 import io.quarkus.runtime.annotations.RegisterForReflection
 import io.smallrye.mutiny.Uni
 import org.eclipse.microprofile.metrics.{MetricRegistry, Tag}
@@ -17,6 +17,7 @@ class PizzaNameScalaService {
   val cities: List[String] = initCities
 
   import io.quarkus.cache.CacheName
+
   import javax.inject.Inject
 
   @Inject
@@ -31,7 +32,7 @@ class PizzaNameScalaService {
 
 
   private def initCities = {
-    val source = Source.fromFile("src/main/resources/META-INF/resources/cities.dat")("UTF-8")
+    val source = Source.fromResource("cities.dat")("UTF-8")
     val lines = source.getLines.toList
     source.close
     lines
